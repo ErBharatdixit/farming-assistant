@@ -149,24 +149,9 @@ const Home = () => {
               link: "/fertilizer"
             },
             {
-              title: t('diseaseFeature'),
-              text: t('diseaseFeatureDesc'),
-              link: "/disease-detection"
-            },
-            {
               title: t('weatherFeature'),
               text: t('weatherFeatureDesc'),
               link: "/weather"
-            },
-            {
-              title: t('chatbotFeature'),
-              text: t('chatbotFeatureDesc'),
-              link: "/chatbot"
-            },
-            {
-              title: t('analyticsFeature'),
-              text: t('analyticsFeatureDesc'),
-              link: "/dashboard"
             },
           ].map((f, i) => (
             <Link to={f.link} key={i}>

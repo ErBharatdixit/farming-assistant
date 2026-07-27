@@ -13,19 +13,28 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 BASE_URL = "https://api.openweathermap.org/data/2.5"
 
 @router.get("/current", response_model=WeatherCurrent)
-async def get_current_weather(city: str = Query("Delhi", description="City name to fetch weather for")):
+async def get_current_weather(
+    city: str = Query(None, description="City name to fetch weather for"),
+    lat: float = Query(None, description="Latitude"),
+    lon: float = Query(None, description="Longitude")
+):
     if not OPENWEATHER_API_KEY:
         raise HTTPException(status_code=500, detail="OpenWeatherMap API key not configured")
+    
+    params = {"appid": OPENWEATHER_API_KEY, "units": "metric"}
+    if lat is not None and lon is not None:
+        params["lat"] = lat
+        params["lon"] = lon
+    elif city:
+        params["q"] = city
+    else:
+        params["q"] = "Delhi"
     
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{BASE_URL}/weather",
-                params={
-                    "q": city,
-                    "appid": OPENWEATHER_API_KEY,
-                    "units": "metric"
-                }
+                params=params
             )
             
             if response.status_code != 200:
@@ -47,19 +56,28 @@ async def get_current_weather(city: str = Query("Delhi", description="City name 
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/forecast", response_model=WeatherForecast)
-async def get_weather_forecast(city: str = Query("Delhi", description="City name to fetch forecast for")):
+async def get_weather_forecast(
+    city: str = Query(None, description="City name to fetch forecast for"),
+    lat: float = Query(None, description="Latitude"),
+    lon: float = Query(None, description="Longitude")
+):
     if not OPENWEATHER_API_KEY:
         raise HTTPException(status_code=500, detail="OpenWeatherMap API key not configured")
+    
+    params = {"appid": OPENWEATHER_API_KEY, "units": "metric"}
+    if lat is not None and lon is not None:
+        params["lat"] = lat
+        params["lon"] = lon
+    elif city:
+        params["q"] = city
+    else:
+        params["q"] = "Delhi"
     
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{BASE_URL}/forecast",
-                params={
-                    "q": city,
-                    "appid": OPENWEATHER_API_KEY,
-                    "units": "metric"
-                }
+                params=params
             )
             
             if response.status_code != 200:
@@ -67,13 +85,25 @@ async def get_weather_forecast(city: str = Query("Delhi", description="City name
             
             data = response.json()
             
-            # OpenWeatherMap /forecast returns 5-day / 3-hour data. 
+            # Parse weather data for daily display
             # We want to group it by day.
             daily_forecast = []
             seen_dates = set()
+            intervals = []
             
-            for item in data["list"]:
-                date_str = datetime.fromtimestamp(item["dt"]).strftime("%Y-%m-%d")
+            for i, item in enumerate(data["list"]):
+                dt = datetime.fromtimestamp(item["dt"])
+                date_str = dt.strftime("%Y-%m-%d")
+                
+                # Save next 24 hour intervals
+                if i < 8:
+                    intervals.append({
+                        "time": dt.strftime("%I:%M %p"),
+                        "temp": item["main"]["temp"],
+                        "description": item["weather"][0]["description"],
+                        "icon": item["weather"][0]["icon"]
+                    })
+
                 if date_str not in seen_dates and len(daily_forecast) < 7:
                     seen_dates.add(date_str)
                     daily_forecast.append(ForecastDay(
@@ -87,7 +117,8 @@ async def get_weather_forecast(city: str = Query("Delhi", description="City name
             
             return WeatherForecast(
                 city=data["city"]["name"],
-                forecast=daily_forecast
+                forecast=daily_forecast,
+                intervals=intervals
             )
     except HTTPException as e:
         raise e

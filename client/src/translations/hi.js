@@ -46,22 +46,16 @@ export const hi = {
 
       // Features
       cropRecommendation: "फसल सिफारिश",
-      cropRecommendationDesc: "अपनी मिट्टी के स्वास्थ्य के आधार पर सबसे अच्छी फसलों के लिए AI-संचालित सुझाव प्राप्त करें।",
+      cropRecommendationDesc: "अपनी मिट्टी के स्वास्थ्य के आधार पर सबसे अच्छी फसलों के लिए सटीक सुझाव प्राप्त करें।",
       fertilizerGuide: "उर्वरक गाइड",
       fertilizerGuideDesc: "अपनी उपज बढ़ाने और मिट्टी की गुणवत्ता बनाए रखने के लिए सही उर्वरक मिश्रण खोजें।",
-      diseaseDetection: "रोग पहचान",
-      diseaseDetectionDesc: "तुरंत रोगों का पता लगाने और उपचार योजना प्राप्त करने के लिए अपने पौधों की तस्वीरें अपलोड करें।",
       weatherForecast: "मौसम पूर्वानुमान",
       weatherForecastDesc: "अपनी खेती की गतिविधियों की योजना बनाने में मदद के लिए विस्तृत 7-दिन का मौसम पूर्वानुमान।",
-      aiChatbot: "AI चैटबॉट",
-      aiChatbotDesc: "सवाल हैं? हिंदी या अंग्रेजी में हमारे AI सहायक से कभी भी चैट करें।",
-      farmAnalytics: "खेत विश्लेषण",
-      farmAnalyticsDesc: "अपने खेत के प्रदर्शन को ट्रैक करें और उपज सुधारने के लिए कार्रवाई योग्य अंतर्दृष्टि प्राप्त करें।",
 
       // Crop Recommendation Page
       backToDashboard: "डैशबोर्ड पर वापस जाएं",
       cropRecommendationTitle: "फसल सिफारिश",
-      cropRecommendationSubtitle: "नीचे अपनी मिट्टी और मौसम का विवरण दर्ज करें। हमारा AI डेटा का विश्लेषण करेगा और आपके खेत के लिए सबसे अच्छी फसल का सुझाव देगा।",
+      cropRecommendationSubtitle: "नीचे अपनी मिट्टी और मौसम का विवरण दर्ज करें। हम डेटा का विश्लेषण करेंगे और आपके खेत के लिए सबसे अच्छी फसल का सुझाव देंगे।",
       soilNutrients: "मिट्टी के पोषक तत्व",
       environment: "पर्यावरण",
       nitrogen: "नाइट्रोजन (N)",
@@ -93,8 +87,8 @@ export const hi = {
 
       // Home Page
       heroTitle: "स्मार्ट तरीके से उगाएं",
-      heroSubtitle: "AI-संचालित खेती",
-      heroDescription: "फार्मअसिस्ट प्रकृति, डेटा और प्रौद्योगिकी को जोड़ता है ताकि किसानों को बेहतर निर्णय लेने में मदद मिल सके - फसल चयन से लेकर उर्वरक मार्गदर्शन तक।",
+      heroSubtitle: "आधुनिक खेती",
+      heroDescription: "फार्मअसिस्ट प्रकृति, डेटा और सटीक तकनीक को जोड़ता है ताकि किसानों को बेहतर निर्णय लेने में मदद मिल सके - फसल चयन से लेकर उर्वरक मार्गदर्शन तक।",
       keyFeatures: "मुख्य विशेषताएं",
 
       // Feature Cards (Home)
@@ -102,14 +96,8 @@ export const hi = {
       cropFeatureDesc: "मिट्टी, मौसम और क्षेत्र के आधार पर सर्वोत्तम फसलों के लिए सुझाव प्राप्त करें।",
       fertilizerFeature: "🧪 उर्वरक गाइड",
       fertilizerFeatureDesc: "पोषक तत्वों की आवश्यकता और फसल के प्रकार के आधार पर उर्वरक मिश्रण प्राप्त करें।",
-      diseaseFeature: "📸 रोग पहचान",
-      diseaseFeatureDesc: "पौधों की बीमारियों को तुरंत पहचानने के लिए पत्ती की छवियां अपलोड करें।",
       weatherFeature: "☁️ लाइव मौसम अलर्ट",
       weatherFeatureDesc: "वर्षा, आर्द्रता, तापमान के बारे में तुरंत सूचित रहें।",
-      chatbotFeature: "🤖 स्मार्ट चैट सहायक",
-      chatbotFeatureDesc: "खेती के सवाल पूछें और तुरंत AI सहायता प्राप्त करें।",
-      analyticsFeature: "📊 विश्लेषण डैशबोर्ड",
-      analyticsFeatureDesc: "सुंदर अंतर्दृष्टि के साथ अपने खेत की प्रगति को ट्रैक करें।",
 
       // Crop Recommendation Result
       analysisResult: "विश्लेषण परिणाम",
@@ -117,7 +105,7 @@ export const hi = {
       predictionMessage: "आपकी मिट्टी के N-P-K मूल्यों और वर्तमान मौसम की स्थिति के आधार पर,",
       highestYield: "सबसे अधिक उपज देने की भविष्यवाणी की गई है।",
       readyToAnalyze: "विश्लेषण के लिए तैयार",
-      fillFormMessage: "AI-संचालित सिफारिश प्राप्त करने के लिए फॉर्म भरें।",
+      fillFormMessage: "सटीक सिफारिश प्राप्त करने के लिए फॉर्म भरें।",
 
       // Crop Names
       crop_rice: "चावल (Rice)",

@@ -32,22 +32,16 @@ export const en = {
 
       // Features
       cropRecommendation: "Crop Recommendation",
-      cropRecommendationDesc: "Get AI-powered suggestions for the best crops to plant based on your soil health.",
+      cropRecommendationDesc: "Get precise suggestions for the best crops to plant based on your soil health.",
       fertilizerGuide: "Fertilizer Guide",
       fertilizerGuideDesc: "Find the perfect fertilizer mix to boost your yield and maintain soil quality.",
-      diseaseDetection: "Disease Detection",
-      diseaseDetectionDesc: "Upload photos of your plants to instantly detect diseases and get treatment plans.",
       weatherForecast: "Weather Forecast",
       weatherForecastDesc: "Detailed 7-day weather forecast to help you plan your farming activities.",
-      aiChatbot: "AI Chatbot",
-      aiChatbotDesc: "Have questions? Chat with our AI assistant in Hindi or English anytime.",
-      farmAnalytics: "Farm Analytics",
-      farmAnalyticsDesc: "Track your farm's performance and get actionable insights to improve yield.",
 
       // Crop Recommendation Page
       backToDashboard: "Back to Dashboard",
       cropRecommendationTitle: "Crop Recommendation",
-      cropRecommendationSubtitle: "Enter your soil and weather details below. Our AI will analyze the data and suggest the best crop for your farm.",
+      cropRecommendationSubtitle: "Enter your soil and weather details below. We'll analyze the data and suggest the best crop for your farm.",
       soilNutrients: "Soil Nutrients",
       environment: "Environment",
       nitrogen: "Nitrogen (N)",
@@ -60,7 +54,7 @@ export const en = {
       analysisResult: "Analysis Result",
       bestCropToPlant: "Best Crop to Plant",
       readyToAnalyze: "Ready to Analyze",
-      fillFormMessage: "Fill out the form to get an AI-powered recommendation.",
+      fillFormMessage: "Fill out the form to get a precise recommendation.",
       predictionBased: "Based on your soil's N-P-K values and current weather conditions,",
       predictedToGive: "is predicted to give the highest yield.",
 
@@ -85,8 +79,8 @@ export const en = {
 
       // Home Page
       heroTitle: "Grow Smarter With",
-      heroSubtitle: "AI-Powered Farming",
-      heroDescription: "FarmAssist combines nature, data and technology to help farmers make better decisions — from crop selection to fertilizer guidance.",
+      heroSubtitle: "Modern Farming",
+      heroDescription: "FarmAssist combines biology, data and precision to help farmers make better decisions — from crop selection to fertilizer guidance.",
       keyFeatures: "Key Features",
 
       // Feature Cards (Home)
@@ -94,14 +88,8 @@ export const en = {
       cropRecFeatureDesc: "Get suggestions for the best crops based on soil, weather and region.",
       fertilizerFeature: "🧪 Fertilizer Guide",
       fertilizerFeatureDesc: "Receive fertilizer mixes based on nutrient needs and crop type.",
-      diseaseFeature: "📸 Disease Detection",
-      diseaseFeatureDesc: "Upload leaf images to identify plant diseases instantly.",
       weatherFeature: "☁️ Live Weather Alerts",
       weatherFeatureDesc: "Be notified about rainfall, humidity, temperature instantly.",
-      chatbotFeature: "🤖 Smart Chat Assistant",
-      chatbotFeatureDesc: "Ask farming questions and get instant AI support.",
-      analyticsFeature: "📊 Analytics Dashboard",
-      analyticsFeatureDesc: "Track your farm progress with beautiful insights.",
 
       // Crop Recommendation Result
       analysisResult: "Analysis Result",
@@ -109,7 +97,7 @@ export const en = {
       predictionMessage: "Based on your soil's N-P-K values and current weather conditions,",
       highestYield: "is predicted to give the highest yield.",
       readyToAnalyze: "Ready to Analyze",
-      fillFormMessage: "Fill out the form to get an AI-powered recommendation.",
+      fillFormMessage: "Fill out the form to get a precise recommendation.",
 
       // Crop Names
       crop_rice: "Rice",

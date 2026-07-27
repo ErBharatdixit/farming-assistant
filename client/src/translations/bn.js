@@ -32,22 +32,16 @@ export const bn = {
 
       // Features
       cropRecommendation: "ফসল সুপারিশ",
-      cropRecommendationDesc: "আপনার মাটির স্বাস্থ্যের উপর ভিত্তি করে রোপণের জন্য সেরা ফসলের জন্য AI-চালিত পরামর্শ পান।",
-      fertilizerGuide: "সার গাইড",
-      fertilizerGuideDesc: "আপনার ফলন বাড়াতে এবং মাটির গুণমান বজায় রাখতে নিখুঁত সার মিশ্রণ খুঁজুন।",
-      diseaseDetection: "রোগ সনাক্তকরণ",
-      diseaseDetectionDesc: "তাৎক্ষণিকভাবে রোগ সনাক্ত করতে এবং চিকিত্সা পরিকল্পনা পেতে আপনার গাছের ছবি আপলোড করুন।",
-      weatherForecast: "আবহাওয়ার পূর্বাভাস",
-      weatherForecastDesc: "আপনার কৃষি কার্যক্রম পরিকল্পনা করতে সাহায্য করার জন্য বিস্তারিত 7-দিনের আবহাওয়ার পূর্বাভাস।",
-      aiChatbot: "AI চ্যাটবট",
-      aiChatbotDesc: "প্রশ্ন আছে? বাংলা বা ইংরেজিতে আমাদের AI সহায়কের সাথে যেকোনো সময় চ্যাট করুন।",
-      farmAnalytics: "খামার বিশ্লেষণ",
-      farmAnalyticsDesc: "আপনার খামারের কর্মক্ষমতা ট্র্যাক করুন এবং ফলন উন্নত করতে কার্যকর অন্তর্দৃষ্টি পান।",
+      cropRecommendationDesc: "আপনার মাটির স্বাস্থ্যের উপর ভিত্তি করে রোপণের জন্য সেরা ফসলের জন্য সঠিক পরামর্শ পান।",
+      fertilizerGuide: "সার সহায়িকা",
+      fertilizerGuideDesc: "আপনার ফলন বাড়াতে এবং মাটির গুণমান বজায় রাখতে সঠিক সার মিশ্রণ খুঁজুন।",
+      weatherForecast: "আবহাওয়ার পূর্বাভাস",
+      weatherForecastDesc: "আপনার কৃষি কার্যক্রম পরিকল্পনা করতে সাহায্য করার জন্য বিস্তারিত ৭ দিনের আবহাওয়ার পূর্বাভাস।",
 
       // Crop Recommendation Page
       backToDashboard: "ড্যাশবোর্ডে ফিরে যান",
       cropRecommendationTitle: "ফসল সুপারিশ",
-      cropRecommendationSubtitle: "নীচে আপনার মাটি এবং আবহাওয়ার বিবরণ লিখুন। আমাদের AI ডেটা বিশ্লেষণ করবে এবং আপনার খামারের জন্য সেরা ফসল সুপারিশ করবে।",
+      cropRecommendationSubtitle: "নীচে আপনার মাটি এবং আবহাওয়ার বিবরণ লিখুন। আমরা ডেটা বিশ্লেষণ করব এবং আপনার খামারের জন্য সেরা ফসল সুপারিশ করব।",
       soilNutrients: "মাটির পুষ্টি",
       environment: "পরিবেশ",
       nitrogen: "নাইট্রোজেন (N)",
@@ -68,7 +62,7 @@ export const bn = {
       // Auth
       farmer: "কৃষক",
       readyToAnalyze: "বিশ্লেষণের জন্য প্রস্তুত",
-      fillFormMessage: "AI-চালিত সুপারিশ পেতে ফর্মটি পূরণ করুন।",
+      fillFormMessage: "সঠিক সুপারিশ পেতে ফর্মটি পূরণ করুন।",
 
       // Crop Names
       crop_rice: "চাল (Rice)",

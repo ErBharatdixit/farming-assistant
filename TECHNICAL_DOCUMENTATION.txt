@@ -5,10 +5,10 @@
 
 PROJECT OVERVIEW
 ================================================================================
-FarmAssist is an AI-powered farming assistant web application that helps 
+FarmAssist is an intelligent farming assistant web application that helps 
 farmers make data-driven decisions for crop selection, fertilizer guidance, 
-disease detection, and weather monitoring. The core feature is an intelligent 
-Crop Recommendation System powered by Machine Learning.
+and weather monitoring. The core feature is a precision 
+Crop Recommendation System powered by data analysis models.
 
 ================================================================================
 COMPLETE TECHNOLOGY STACK
@@ -510,7 +510,7 @@ data-driven decisions.
 
 ================================================================================
 PREPARED FOR: College Presentation
-PROJECT: FarmAssist - AI-Powered Farming Assistant
+PROJECT: FarmAssist - Intelligent Farming Assistant
 DATE: December 2024
 ================================================================================
  run command

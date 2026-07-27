@@ -10,6 +10,12 @@ class WeatherCurrent(BaseModel):
     icon: str
     city: str
 
+class WeatherInterval(BaseModel):
+    time: str
+    temp: float
+    description: str
+    icon: str
+
 class ForecastDay(BaseModel):
     date: str
     temp_min: float
@@ -21,3 +27,4 @@ class ForecastDay(BaseModel):
 class WeatherForecast(BaseModel):
     city: str
     forecast: List[ForecastDay]
+    intervals: Optional[List[WeatherInterval]] = []

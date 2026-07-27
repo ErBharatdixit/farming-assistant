@@ -7,12 +7,12 @@ import { useAuth } from "../context/AuthProvider";
 import { useLanguage } from "../context/LanguageProvider";
 import LanguageSelector from "../components/LanguageSelector";
 
-/* ---------------- UTILS (cn) ---------------- */
+// Utility functions
 function cn(...classes) {
       return classes.filter(Boolean).join(" ");
 }
 
-/* ---------------- GLASS CARD COMPONENTS ---------------- */
+// UI Components
 const Card = ({ className, children }) => (
       <div className={cn("glass-card rounded-2xl p-6", className)}>
             {children}
@@ -40,7 +40,7 @@ const CardContent = ({ className, children }) => (
       <div className={cn("", className)}>{children}</div>
 );
 
-/* ---------------- HEADER ---------------- */
+// Header component
 const Header = () => {
       const { logout, user } = useAuth();
       const { t } = useLanguage();

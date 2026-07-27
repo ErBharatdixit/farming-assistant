@@ -7,12 +7,12 @@ import { useAuth } from "../context/AuthProvider";
 import { useLanguage } from "../context/LanguageProvider";
 import LanguageSelector from "../components/LanguageSelector";
 
-/* ---------------- UTILS (cn) ---------------- */
+// Utility functions
 function cn(...classes) {
       return classes.filter(Boolean).join(" ");
 }
 
-/* ---------------- GLASS CARD COMPONENTS ---------------- */
+// UI Components
 const Card = ({ className, children }) => (
       <div className={cn("glass-card rounded-2xl p-6", className)}>
             {children}
@@ -40,7 +40,7 @@ const CardContent = ({ className, children }) => (
       <div className={cn("", className)}>{children}</div>
 );
 
-/* ---------------- HEADER ---------------- */
+// Header component
 const Header = () => {
       const { logout, user } = useAuth();
       const { t } = useLanguage();
@@ -147,7 +147,7 @@ const FertilizerGuide = () => {
             try {
                   const response = await axiosInstance.post("/api/fertilizer/predict", formData);
                   setResult(response.data);
-                  toast.success("ML Analysis complete!");
+                  toast.success("Analysis complete!");
             } catch (error) {
                   toast.error("Failed to get fertilizer prediction.");
             } finally {
@@ -183,7 +183,7 @@ const FertilizerGuide = () => {
                                                                   {t('fertilizerTitle')}
                                                             </CardTitle>
                                                             <p className="text-gray-500 text-sm">
-                                                                  Using Advanced Machine Learning for Precise Recommendations
+                                                                  Providing Precise Soil and Crop Recommendations
                                                             </p>
                                                       </CardHeader>
                                                       <CardContent>
@@ -295,7 +295,7 @@ const FertilizerGuide = () => {
                                                                                     {result.description}
                                                                               </p>
                                                                               <p className="text-[10px] text-blue-400 font-medium italic border-t pt-2">
-                                                                                    This recommendation is based on a Random Forest ML model trained with historical soil and environmental data.
+                                                                                    This recommendation is based on historical soil and environmental data analysis.
                                                                               </p>
                                                                         </div>
                                                                   </div>
@@ -306,7 +306,7 @@ const FertilizerGuide = () => {
                                                                         </div>
                                                                         <p className="font-medium">{t('readyToAnalyze')}</p>
                                                                         <p className="text-sm mt-2 max-w-[200px]">
-                                                                              Enter your data to get an ML-powered prediction.
+                                                                              Enter your data to get a precise recommendation.
                                                                         </p>
                                                                   </div>
                                                             )}

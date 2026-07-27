@@ -3,13 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Sprout,
   Droplets,
-  Bug,
   CloudRain,
-  MessageSquare,
   ArrowRight,
   TrendingUp,
   Sun,
-  Activity,
   Wind,
   Cloud,
   LogOut,
@@ -19,12 +16,12 @@ import { useAuth } from "../context/AuthProvider";
 import { useLanguage } from "../context/LanguageProvider";
 import LanguageSelector from "../components/LanguageSelector";
 
-/* ---------------- UTILS (cn) ---------------- */
+// Utility functions
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-/* ---------------- GLASS CARD COMPONENTS ---------------- */
+// UI Components
 const Card = ({ className, children }) => (
   <div className={cn("glass-card rounded-2xl p-6", className)}>
     {children}
@@ -56,7 +53,7 @@ const CardContent = ({ className, children }) => (
   <div className={cn("", className)}>{children}</div>
 );
 
-/* ---------------- HEADER ---------------- */
+// Header component
 const Header = () => {
   const { logout, user } = useAuth();
   const { t } = useLanguage();
@@ -105,7 +102,7 @@ const Header = () => {
   );
 };
 
-/* ---------------- FOOTER ---------------- */
+// Footer component
 const Footer = () => {
   const { t } = useLanguage();
   return (
@@ -115,7 +112,7 @@ const Footer = () => {
   );
 };
 
-/* ---------------- DASHBOARD PAGE ---------------- */
+// Main Dashboard
 const Dashboard = () => {
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -124,8 +121,27 @@ const Dashboard = () => {
   React.useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const response = await axiosInstance.get("/api/weather/current?city=Delhi");
-        setWeatherData(response.data);
+        // Fetch current location
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const { latitude, longitude } = position.coords;
+              const response = await axiosInstance.get(`/api/weather/current?lat=${latitude}&lon=${longitude}`);
+              setWeatherData(response.data);
+            },
+            async (error) => {
+              console.warn("Geolocation error:", error);
+              // Fallback to Delhi
+              const response = await axiosInstance.get("/api/weather/current?city=Delhi");
+              setWeatherData(response.data);
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+          );
+        } else {
+          // Fallback to Delhi if geolocation not supported
+          const response = await axiosInstance.get("/api/weather/current?city=Delhi");
+          setWeatherData(response.data);
+        }
       } catch (error) {
         console.error("Dashboard weather error:", error);
       }
@@ -252,23 +268,7 @@ const Dashboard = () => {
                 </Card>
               </Link>
 
-              {/* Disease Detection */}
-              <Link to="/disease-detection" className="group">
-                <Card className="h-full hover:border-red-400/50 hover:bg-white/90 transition-all duration-300">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Bug className="w-7 h-7 text-red-600" />
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-colors">
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">{t('diseaseDetection')}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">
-                    {t('diseaseDetectionDesc')}
-                  </p>
-                </Card>
-              </Link>
+
 
               {/* Weather */}
               <Link to="/weather" className="group">
@@ -288,41 +288,7 @@ const Dashboard = () => {
                 </Card>
               </Link>
 
-              {/* Chatbot */}
-              <Link to="/chatbot" className="group">
-                <Card className="h-full hover:border-orange-400/50 hover:bg-white/90 transition-all duration-300">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-orange-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <MessageSquare className="w-7 h-7 text-orange-600" />
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">{t('aiChatbot')}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">
-                    {t('aiChatbotDesc')}
-                  </p>
-                </Card>
-              </Link>
 
-              {/* Analytics */}
-              <div className="group cursor-pointer">
-                <Card className="h-full hover:border-yellow-400/50 hover:bg-white/90 transition-all duration-300">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Activity className="w-7 h-7 text-yellow-600" />
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-yellow-500 group-hover:text-white transition-colors">
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">{t('farmAnalytics')}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">
-                    {t('farmAnalyticsDesc')}
-                  </p>
-                </Card>
-              </div>
             </div>
 
             {/* Recent Activity */}

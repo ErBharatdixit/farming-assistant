@@ -4,18 +4,19 @@ import {
       Sun, Cloud, CloudRain, CloudLightning, Wind, Droplets,
       ArrowLeft, Search, Navigation, Calendar, Loader2, Info
 } from "lucide-react";
+import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../utils/axiosInstance";
 import { useAuth } from "../context/AuthProvider";
 import { useLanguage } from "../context/LanguageProvider";
 
 
-/* ---------------- UTILS (cn) ---------------- */
+// Utility functions
 function cn(...classes) {
       return classes.filter(Boolean).join(" ");
 }
 
-/* ---------------- GLASS CARD COMPONENTS ---------------- */
+// UI Components
 const Card = ({ className, children }) => (
       <div className={cn("glass-card rounded-2xl p-6", className)}>
             {children}
@@ -38,7 +39,7 @@ const CardContent = ({ className, children }) => (
       <div className={cn("", className)}>{children}</div>
 );
 
-/* ---------------- WEATHER ICON HELPER ---------------- */
+// Weather icon helper
 const WeatherIcon = ({ iconCode, className }) => {
       // Map OpenWeather codes to Lucide icons
       if (iconCode?.startsWith("01")) return <Sun className={cn("text-yellow-500", className)} />;
@@ -58,16 +59,31 @@ const Weather = () => {
       const [forecast, setForecast] = useState(null);
       const [loading, setLoading] = useState(true);
       const [searchCity, setSearchCity] = useState("");
+      const [showDetailedLog, setShowDetailedLog] = useState(false);
 
-      const fetchWeather = async (targetCity) => {
+      const fetchWeather = async (targetCity, lat, lon) => {
             setLoading(true);
             try {
+                  let currentUrl = "/api/weather/current";
+                  let forecastUrl = "/api/weather/forecast";
+
+                  if (lat !== undefined && lon !== undefined) {
+                        currentUrl += `?lat=${lat}&lon=${lon}`;
+                        forecastUrl += `?lat=${lat}&lon=${lon}`;
+                  } else {
+                        currentUrl += `?city=${targetCity}`;
+                        forecastUrl += `?city=${targetCity}`;
+                  }
+
                   const [currentRes, forecastRes] = await Promise.all([
-                        axiosInstance.get(`/api/weather/current?city=${targetCity}`),
-                        axiosInstance.get(`/api/weather/forecast?city=${targetCity}`)
+                        axiosInstance.get(currentUrl),
+                        axiosInstance.get(forecastUrl)
                   ]);
                   setCurrentWeather(currentRes.data);
                   setForecast(forecastRes.data);
+                  if (currentRes.data.city) {
+                        setCity(currentRes.data.city);
+                  }
             } catch (error) {
                   console.error("Weather error:", error);
                   toast.error("City not found or API error");
@@ -77,7 +93,21 @@ const Weather = () => {
       };
 
       useEffect(() => {
-            fetchWeather(city);
+            if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                              const { latitude, longitude } = position.coords;
+                              fetchWeather(null, latitude, longitude);
+                        },
+                        (error) => {
+                              console.warn("Geolocation denied or failed:", error);
+                              fetchWeather(city);
+                        },
+                        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                  );
+            } else {
+                  fetchWeather(city);
+            }
       }, []);
 
       const handleSearch = (e) => {
@@ -215,7 +245,10 @@ const Weather = () => {
                                                                               {t('tempAdvice').replace('{temp}', Math.round(currentWeather.temp))}
                                                                         </p>
                                                                   </div>
-                                                                  <button className="w-full py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-black transition-colors">
+                                                                  <button
+                                                                        onClick={() => setShowDetailedLog(true)}
+                                                                        className="w-full py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-black transition-colors"
+                                                                  >
                                                                         {t('viewDetailedLog')}
                                                                   </button>
                                                             </CardContent>
@@ -249,6 +282,65 @@ const Weather = () => {
                               </div>
                         </main>
                   </div>
+
+                  {/* Detailed Log Modal */}
+                  {showDetailedLog && forecast && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+                              <div
+                                    className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+                                    onClick={() => setShowDetailedLog(false)}
+                              ></div>
+                              <motion.div
+                                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden"
+                              >
+                                    <div className="p-6 border-b border-gray-100 flex justify-between items-center">
+                                          <div>
+                                                <h3 className="text-xl font-bold text-gray-800">{t('viewDetailedLog')}</h3>
+                                                <p className="text-sm text-gray-500">{forecast.city} — Next 24 Hours</p>
+                                          </div>
+                                          <button
+                                                onClick={() => setShowDetailedLog(false)}
+                                                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                          >
+                                                <ArrowLeft className="w-6 h-6 text-gray-500 rotate-90 sm:rotate-0" />
+                                          </button>
+                                    </div>
+                                    <div className="p-6 max-h-[60vh] overflow-y-auto">
+                                          <div className="space-y-4">
+                                                {forecast.intervals.map((interval, index) => (
+                                                      <div
+                                                            key={index}
+                                                            className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-blue-50 transition-colors group"
+                                                      >
+                                                            <div className="flex items-center gap-4">
+                                                                  <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+                                                                        <WeatherIcon iconCode={interval.icon} className="w-6 h-6" />
+                                                                  </div>
+                                                                  <div>
+                                                                        <p className="font-bold text-gray-800">{interval.time}</p>
+                                                                        <p className="text-sm text-gray-500 capitalize">{interval.description}</p>
+                                                                  </div>
+                                                            </div>
+                                                            <div className="text-right">
+                                                                  <p className="text-2xl font-black text-blue-600">{Math.round(interval.temp)}°</p>
+                                                            </div>
+                                                      </div>
+                                                ))}
+                                          </div>
+                                    </div>
+                                    <div className="p-6 bg-gray-50 border-t border-gray-100">
+                                          <button
+                                                onClick={() => setShowDetailedLog(false)}
+                                                className="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
+                                          >
+                                                Close
+                                          </button>
+                                    </div>
+                              </motion.div>
+                        </div>
+                  )}
             </div>
       );
 };

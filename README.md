@@ -97,6 +97,16 @@ If you have new data or want to verify accuracy, you can retrain the model.
 ### Dashboard
 Provides a quick overview of farm stats, weather, and quick links to tools.
 
+### Fertilizer Guide
+Uses machine learning to recommend the appropriate fertilizer based on soil nutrient levels, crop type, and environmental factors.
+
+### Weather Forecast
+Provides real-time, localized weather updates and forecasts to help plan agricultural activities.
+
+### Multilingual Support
+Accessible in multiple regional languages to cater to a diverse user base across different regions.
+
+
 ## 📂 Project Structure
 
 ```

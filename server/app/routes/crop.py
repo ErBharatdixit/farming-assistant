@@ -8,7 +8,7 @@ import joblib
 import numpy as np
 import os
 
-# Load model
+# Initialize predictor
 MODEL_PATH = "crop_recommendation_model.pkl"
 model = None
 
@@ -20,10 +20,10 @@ else:
 @router.post("/predict", response_model=CropOutput)
 async def predict_crop(data: CropInput):
     if not model:
-        raise HTTPException(status_code=500, detail="Model not loaded")
+        raise HTTPException(status_code=500, detail="Recommendation system unavailable")
 
     try:
-        # Prepare input for model
+        # Process input data
         input_data = np.array([[
             data.N, 
             data.P, 

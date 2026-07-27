@@ -21,7 +21,7 @@ else:
 @router.post("/predict", response_model=FertilizerOutput)
 async def suggest_fertilizer(data: FertilizerInput):
     if not model or not encoders:
-        raise HTTPException(status_code=500, detail="ML model for fertilizer not loaded")
+        raise HTTPException(status_code=500, detail="Recommendation engine not initialized")
     
     try:
         # Encode categorical features
@@ -40,7 +40,7 @@ async def suggest_fertilizer(data: FertilizerInput):
         soil_encoded = safe_encode(encoders['Soil Type'], data.soilType)
         crop_encoded = safe_encode(encoders['Crop Type'], data.cropType)
 
-        # Prepare input for model
+        # Process input data
         input_data = np.array([[
             data.temperature,
             data.humidity,

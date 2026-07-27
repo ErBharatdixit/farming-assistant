@@ -15,7 +15,7 @@ async def init_db():
         # Test the connection
         await client.server_info()  
 
-        print("🔥🔥 DATABASE CONNECTED SUCCESSFULLY 🔥🔥")
+        print(" DATABASE CONNECTED SUCCESSFULLY ")
 
         db_name = MONGO_URI.split("/")[-1].split("?")[0]
         db = client[db_name]
@@ -25,6 +25,6 @@ async def init_db():
             document_models=[User]
         )
     except Exception as e:
-        print("❌❌ DATABASE CONNECTION FAILED ❌❌")
+        print("DATABASE CONNECTION FAILED ")
         print("Error:", e)
         raise e
